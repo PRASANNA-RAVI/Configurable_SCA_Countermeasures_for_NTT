@@ -9,6 +9,7 @@ The directory crypto_kem contains the implementations of the various parameter s
 
 The protected implementations can be run using two scripts - `script_kyber.sh` for Kyber and `script_dilithium.sh` for Dilithium.
 One can run the command `sh script_kyber.sh help` and `sh script_dilithium.sh help` to find the instructions required to run the scripts and interpret its outputs. This project allows to benchmark the runtimes of NTT/INTT operations individually for Kyber and Dilithium or benchmark the complete procedures within Kyber (KeyGen, Encaps, Decaps) and Dilithium (KeyGen, Sign and Verify).
+
 There are four possible options to benchmark:
 
 * Benchmark total shuffling time for shuffling countermeasures (including randomness generation and shuffling algorithm):
@@ -16,9 +17,18 @@ There are four possible options to benchmark:
 * To benchmark total NTT/INTT time:
 * To benchmark total procedure time:
 
-We also provide nine options for countermeasures
+We also provide eight options for countermeasures (Please refer to paper [here](https://eprint.iacr.org/2020/1038.pdf) for details on terminology used):
 
-*
+* No Protection
+* Coarse Shuffling
+* Coarse Group Shuffling
+* Coarse within Group Shuffling
+* Fine Shuffling
+* Coarse Masking
+* Fine masking
+* Generic Masking - 2 Masks
+* Generic Masking - 4 Masks
+
 <!--
 The **pqm4** library, benchmarking and testing framework started as a result of the
 [PQCRYPTO](https://pqcrypto.eu.org) project funded by the European Commission in the H2020 program.
