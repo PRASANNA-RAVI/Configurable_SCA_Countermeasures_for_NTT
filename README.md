@@ -16,6 +16,9 @@ There are four possible options to benchmark:
 * To benchmark total NTT/INTT time:
 * To benchmark total procedure time:
 
+We also provide nine options for countermeasures
+
+*
 <!--
 The **pqm4** library, benchmarking and testing framework started as a result of the
 [PQCRYPTO](https://pqcrypto.eu.org) project funded by the European Commission in the H2020 program.
