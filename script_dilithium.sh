@@ -2,8 +2,8 @@
 
 if [ $1 == "help" ]
 then
-echo "Format (e.g) : sh script_kyber.sh kyber512 bench_total_randomize_time"
-echo "Argument 1 Options: kyber512, kyber768, kyber1024"
+echo "Format (e.g) : sh script_dilithium.sh <Argument1> <Argument2> <Argument3>"
+echo "Argument 1 Options: Dilithium2, Dilithium3, Dilithium4"
 echo ""
 echo "Argument 2 Options:"
 echo "1. To benchmark total shuffling time: bench_total_randomize_time"
@@ -12,12 +12,12 @@ echo "3. To benchmark total NTT/INTT time: bench_total_ntt_time"
 echo "4. To benchmark total procedure time: bench_total_procedure_time"
 echo ""
 echo "Argument 3 Options:"
+echo "To only compile: compile"
 echo "To flash and run rmplementations: run"
-echo "To not flash and run rmplementations: dont_run"
 echo ""
 fi
 
-if [ $# == 2 ]
+if [ $# == 3 ]
 then
 
 d="bin_compiled_files"
@@ -37,7 +37,10 @@ then
 cp Headers/benchmark_total_procedure_time.h Headers/benchmark.h
 fi
 
-if [ $1 == "dilithium2" ]
+if [ $3 == "compile" ]
+then
+
+if [ $1 == "Dilithium2" ]
 then
 
 cp Headers/benchmark.h crypto_sign/dilithium2/m4/
@@ -96,7 +99,7 @@ make IMPLEMENTATION_PATH=crypto_sign/dilithium2/m4 bin/crypto_sign_dilithium2_m4
 cp bin/crypto_sign_dilithium2_m4_speed.bin bin_compiled_files/crypto_sign_dilithium2_generic_multiplicative_masking_4_masks.bin
 cp bin/crypto_sign_dilithium2_m4_speed.elf bin_compiled_files/crypto_sign_dilithium2_generic_multiplicative_masking_4_masks.elf
 
-elif [ $1 == "dilithium3" ]
+elif [ $1 == "Dilithium3" ]
 then
 
 cp Headers/benchmark.h crypto_sign/dilithium3/m4/
@@ -155,7 +158,7 @@ make IMPLEMENTATION_PATH=crypto_sign/dilithium3/m4 bin/crypto_sign_dilithium3_m4
 cp bin/crypto_sign_dilithium3_m4_speed.bin bin_compiled_files/crypto_sign_dilithium3_generic_multiplicative_masking_4_masks.bin
 cp bin/crypto_sign_dilithium3_m4_speed.elf bin_compiled_files/crypto_sign_dilithium3_generic_multiplicative_masking_4_masks.elf
 
-elif [ $1 == "dilithium4" ]
+elif [ $1 == "Dilithium4" ]
 then
 
 cp Headers/benchmark.h crypto_sign/dilithium4/m4/
@@ -216,9 +219,13 @@ cp bin/crypto_sign_dilithium4_m4_speed.elf bin_compiled_files/crypto_sign_dilith
 
 fi
 
+rm -rf bin
+
+fi
+
 if [ $3 == "run" ]
 then
-  python get_numbers.py
+  python get_numbers.py $1 $2
 fi
 
 fi

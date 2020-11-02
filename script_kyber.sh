@@ -2,8 +2,8 @@
 
 if [ $1 == "help" ]
 then
-echo "Format (e.g) : sh script_kyber.sh kyber512 bench_total_randomize_time run"
-echo "Argument 1 Options: kyber512, kyber768, kyber1024"
+echo "Format (e.g) : sh script_kyber.sh <Argument1> <Argument2> <Argument3>"
+echo "Argument 1 Options: Kyber512, Kyber768, Kyber1024"
 echo ""
 echo "Argument 2 Options:"
 echo "1. To benchmark total shuffling time: bench_total_randomize_time"
@@ -12,8 +12,8 @@ echo "3. To benchmark total NTT/INTT time: bench_total_ntt_time"
 echo "4. To benchmark total procedure time: bench_total_procedure_time"
 echo ""
 echo "Argument 3 Options:"
+echo "To only compile: compile"
 echo "To flash and run rmplementations: run"
-echo "To not flash and run rmplementations: compile"
 echo ""
 fi
 
@@ -37,7 +37,11 @@ then
 cp Headers/benchmark_total_procedure_time.h Headers/benchmark.h
 fi
 
-if [ $1 == "kyber768" ]
+
+if [ $3 == "compile" ]
+then
+
+if [ $1 == "Kyber768" ]
 then
 
 cp Headers/benchmark.h crypto_kem/kyber768/m4/
@@ -96,7 +100,7 @@ make IMPLEMENTATION_PATH=crypto_kem/kyber768/m4 bin/crypto_kem_kyber768_m4_speed
 cp bin/crypto_kem_kyber768_m4_speed.bin bin_compiled_files/crypto_kem_kyber768_generic_multiplicative_masking_4_masks.bin
 cp bin/crypto_kem_kyber768_m4_speed.elf bin_compiled_files/crypto_kem_kyber768_generic_multiplicative_masking_4_masks.elf
 
-elif [ $1 == "kyber512" ]
+elif [ $1 == "Kyber512" ]
 then
 
 cp Headers/benchmark.h crypto_kem/kyber512/m4/
@@ -155,7 +159,7 @@ make IMPLEMENTATION_PATH=crypto_kem/kyber512/m4 bin/crypto_kem_kyber512_m4_speed
 cp bin/crypto_kem_kyber512_m4_speed.bin bin_compiled_files/crypto_kem_kyber512_generic_multiplicative_masking_4_masks.bin
 cp bin/crypto_kem_kyber512_m4_speed.elf bin_compiled_files/crypto_kem_kyber512_generic_multiplicative_masking_4_masks.elf
 
-elif [ $1 == "kyber1024" ]
+elif [ $1 == "Kyber1024" ]
 then
 
 cp Headers/benchmark.h crypto_kem/kyber1024/m4/
@@ -217,22 +221,13 @@ cp bin/crypto_kem_kyber1024_m4_speed.elf bin_compiled_files/crypto_kem_kyber1024
 
 fi
 
+rm -rf bin
+
+fi
+
 if [ $3 == "run" ]
 then
-  if [ $2 == "bench_total_randomize_time" ]
-  then
-    python get_numbers.py Kyber bench_total_randomize_time
-  elif [ $2 == "bench_only_random_generation_time" ]
-  then
-    python get_numbers.py bench_only_random_generation_time
-  elif [ $2 == "bench_total_ntt_time" ]
-  then
-    python get_numbers.py bench_total_ntt_time
-  elif [ $2 == "bench_total_procedure_time" ]
-  then
-    python get_numbers.py bench_total_procedure_time
-  fi
-
+  python get_numbers.py $1 $2
 fi
 
 fi

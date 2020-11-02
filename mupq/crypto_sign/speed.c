@@ -10,7 +10,7 @@
 #define POLY_MASK_1 0X9ABDCD93
 #define POLY_MASK_2 0X91CB0C2C
 
-#define NTESTS 100
+#define NTESTS 5
 
 // #define ALL_ONLINE 1
 
