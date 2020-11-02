@@ -12,22 +12,22 @@ One can run the command `sh script_kyber.sh help` and `sh script_dilithium.sh he
 
 There are four possible options to benchmark:
 
-* Benchmark total shuffling time for shuffling countermeasures (including randomness generation and shuffling algorithm):
-* Benchmark only random generation (both shuffling and masking countermeasures):
-* To benchmark total NTT/INTT time:
-* To benchmark total procedure time:
+* `bench_total_randomize_time`: Benchmark total shuffling time for shuffling countermeasures (including randomness generation and shuffling algorithm)
+* `bench_only_random_generation_time`: Benchmark only random generation (both shuffling and masking countermeasures)
+* `bench_total_ntt_time`: Benchmark total NTT/INTT time
+* `bench_total_procedure_time`: Benchmark total procedure time
 
 We also provide eight options for countermeasures (Please refer to paper [here](https://eprint.iacr.org/2020/1038.pdf) for details on terminology used):
 
-* No Protection
-* Coarse Shuffling
-* Coarse Group Shuffling
-* Coarse within Group Shuffling
-* Fine Shuffling
-* Coarse Masking
-* Fine masking
-* Generic Masking - 2 Masks
-* Generic Masking - 4 Masks
+* `No Protection`
+* `Coarse Shuffling`
+* `Coarse Group Shuffling`
+* `Coarse within Group Shuffling`
+* `Fine Shuffling`
+* `Coarse Masking`
+* `Fine masking`
+* `Generic Masking - 2 Masks`
+* `Generic Masking - 4 Masks`
 
 <!--
 The **pqm4** library, benchmarking and testing framework started as a result of the
