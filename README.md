@@ -1,12 +1,22 @@
 # Configurable SCA Countermeasures for the NTT Against Single Trace Attacks:
-This project contains implementation of shuffling and masking side-channel countermeasures for the Number Theoretic Transform, a widely used computational kernel for polynomial multiplication in several lattice-based schemes including the NIST finalist candidates such as Kyber and Dilithium. The countermeasures are ported to implementations of Kyber and Dilithium on the ARM Cortex-M4 microcontroller.
+This project contains implementation of shuffling and masking side-channel countermeasures for the Number Theoretic Transform (NTT), a widely used computational kernel for polynomial multiplication in several lattice-based schemes including Kyber Key Encapsulation Mechanism (KEM) and Dilithium Digital Signature (DS), which are finalist candidates in the NIST standardization process for post-quantum cryptography. The countermeasures are ported to implementations of Kyber KEM and Dilithium DS on the ARM Cortex-M4 microcontroller. More details on the countermeasures can be found out from the paper available on IACR ePRINT archive in this [link](https://eprint.iacr.org/2020/1038.pdf). The main aim of this work is to analyze the runtime overheads on the various procedures of Kyber and Dilithium due to the various proposed side-channel countermeasures against single trace attacks for the NTT.
 
-# Implementation_scripts:
+# Project Details:
 
-This directory contains the implementation scripts for the schemes `Kyber512`, `LAC128` and `R5ND_1kemcca_5d` which can run on the STM32F407VG microcontroller based on the ARM Cortex-M4 microcontroller. The scripts help in performing trace acquisition of the target operations within the aforementioned schemes. This directory has the same directory structure as the **pqm4** library. Hence, instructions to run the code can be referred to from the github page **pqm4**. The implementations are written to work with a fixed secret key. It is also important to note that the chosen ciphertexts to perform the pre-processing and attack phase for each scheme is already hardcoded into the implementation. The key generation phase is computed once with the fixed key, however the decapsulation phase can be triggered multiple times with the hardcoded chosen ciphertexts. However, users can modify both the secret key and chosen ciphertexts to test repeatability of the attack.
+The directory crypto_kem contains the implementations of the various parameter sets of Kyber Key Encapsulation M (i.e) `Kyber512`, `Kyber768` and `Kyber1024`. The directory crypto_sign contains implementations of Dilithium `Dilithium2`, `Dilithium3` and `Dilithium4`. These implementations can run on the STM32F407VG microcontroller based on the ARM Cortex-M4 microcontroller. The details of the hardware setup of the STM32F407VG to run this project can be found in the pqm4 project page on github [here](https://github.com/mupq/pqm4).
 
-## Instructions to run the script:
+## Instructions to run the project:
 
+The protected implementations can be run using two scripts - `script_kyber.sh` for Kyber and `script_dilithium.sh` for Dilithium.
+One can run the command `sh script_kyber.sh help` and `sh script_dilithium.sh help` to find the instructions required to run the scripts and interpret its outputs. This project allows to benchmark the runtimes of NTT/INTT operations individually for Kyber and Dilithium or benchmark the complete procedures within Kyber (KeyGen, Encaps, Decaps) and Dilithium (KeyGen, Sign and Verify).
+There are four possible options to benchmark:
+
+* Benchmark total shuffling time for shuffling countermeasures (including randomness generation and shuffling algorithm):
+* Benchmark only random generation (both shuffling and masking countermeasures):
+* To benchmark total NTT/INTT time:
+* To benchmark total procedure time:
+
+<!--
 The **pqm4** library, benchmarking and testing framework started as a result of the
 [PQCRYPTO](https://pqcrypto.eu.org) project funded by the European Commission in the H2020 program.
 It currently contains implementations post-quantum key-encapsulation mechanisms
@@ -306,4 +316,4 @@ Each subdirectory containing implementations contains a LICENSE file stating
 under what license that specific implementation is released.
 The files in common contain licensing information at the top of the file (and
 are currently either public domain or MIT).
-All other code in this repository is released under the conditions of [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+All other code in this repository is released under the conditions of [CC0](https://creativecommons.org/publicdomain/zero/1.0/). -->
